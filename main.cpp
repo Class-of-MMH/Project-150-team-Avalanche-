@@ -9,6 +9,6 @@ int main(){
     switching();
   }
   board draw();
-  cout<<"Upps no one wins! It's a draw! "<<endl;
+  cout<<"Opps no one wins! It's a draw! "<<endl;
   return 0;  
 }
