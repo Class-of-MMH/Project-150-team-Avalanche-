@@ -11,6 +11,7 @@ We are going to create Tic Tac Toe Game in C++. This will be a simple
 console-based application in which the player can play the Tic Tac Toe game and
 also the player can choose from two available modes which are playing with a
 computer and playing with a friend.
+
 FEATURES: 
 
 ● Two game modes are available to play. First play with a computer and
