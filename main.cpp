@@ -95,10 +95,10 @@ int main()
         player_turn();
         gameover();
     }
-    if(turn == 'X' && draw == false){
+    if(turn == 'O' && draw == false){
         cout<<"Congo! Player 'X' has won the game"<<"\n";
     }
-    else if(turn == 'O' && draw == false){
+    else if(turn == 'X' && draw == false){
         cout<<"Congo! Player 'O' has won the game"<<"\n";
     }
     else
