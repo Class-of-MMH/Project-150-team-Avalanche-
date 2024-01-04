@@ -122,7 +122,7 @@ int main()
 
 
 
-// New update computer vs manual:
+
 bool wins(char mark) {
     for (int i = 0; i < 3; ++i) {
         if ((board[i][0] == mark && board[i][1] == mark && board[i][2] == mark) ||
