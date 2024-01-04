@@ -136,5 +136,18 @@ bool wins(char mark) {
     }
     return false;
 }
-
+bool fullboard() {
+    for (const auto &row : board) {
+        for (char cell : row) {
+            if (cell == ' ') return false;
+        }
+    }
+    return true;
+}
+pair<int, int> randommove() {
+    srand(static_cast<unsigned int>(time(nullptr)));
+    int row = rand() % 3;
+    int col = rand() % 3;
+    return {row, col};
+}
 
