@@ -101,28 +101,6 @@ void player_turn(){
     return false;
 }
 
-int main()
-{
-    cout<<"T I C  -- T A C -- T O E -- G A M E\n";
-   
-    while(gameover()){
-        display_board();
-        player_turn();
-        gameover();
-    }
-    if(turn == 'O' && draw == false){
-        cout<<"\nCongo! Player 'X' has won the game"<<"\n";
-    }
-    else if(turn == 'X' && draw == false){
-        cout<<"\nCongo! Player 'O' has won the game"<<"\n";
-    }
-    else
-    cout<<"\nOpps! No one wins! Game is draw!!!"<<"\n";
-}
-
-
-
-
 bool wins(char mark) {
     for (int i = 0; i < 3; ++i) {
         if ((board[i][0] == mark && board[i][1] == mark && board[i][2] == mark) ||
@@ -151,3 +129,27 @@ pair<int, int> randommove() {
     return {row, col};
 }
 
+int main()
+{
+    cout<<"T I C  -- T A C -- T O E -- G A M E\n";
+   
+    while(gameover()){
+        display_board();
+        player_turn();
+        gameover();
+    }
+    if(turn == 'O' && draw == false){
+        cout<<"\nCongo! Player 'X' has won the game"<<"\n";
+    }
+    else if(turn == 'X' && draw == false){
+        cout<<"\nCongo! Player 'O' has won the game"<<"\n";
+    }
+    else
+    cout<<"\nOpps! No one wins! Game is draw!!!"<<"\n";
+}
+
+
+
+
+
+       
