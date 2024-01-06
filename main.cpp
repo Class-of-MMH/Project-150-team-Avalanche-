@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-char board[3][3] = {{'1','2','3'},{'4','5','6'},{'7','8','9'}};
 
 int choice;
 int row,col;
@@ -8,7 +7,7 @@ char turn = 'X';
 bool draw = false;
 
 
-vector<vector<char>> comboard(3, vector<char>(3, ' '));
+vector<vector<char>> board(3, vector<char>(3, ' '));
 
 void display() 
 {
@@ -18,7 +17,7 @@ void display()
         cout << i << " ";
         for (int j = 0; j < 3; ++j) 
         {
-            cout << comboard[i][j];
+            cout << board[i][j];
             if (j < 2) cout << " |";
         }
         cout << endl;
@@ -116,14 +115,14 @@ bool wins(char mark)
 {
     for (int i = 0; i < 3; ++i)
     {
-        if ((comboard[i][0] == mark && comboard[i][1] == mark && comboard[i][2] == mark) ||
-            (comboard[0][i] == mark && comboard[1][i] == mark && comboard[2][i] == mark)) 
+        if ((board[i][0] == mark && board[i][1] == mark && board[i][2] == mark) ||
+            (board[0][i] == mark && board[1][i] == mark && board[2][i] == mark)) 
         {
             return true;
         }
     }
-    if ((comboard[0][0] == mark && comboard[1][1] == mark && comboard[2][2] == mark) ||
-        (comboard[0][2] == mark && comboard[1][1] == mark && comboard[2][0] == mark)) 
+    if ((board[0][0] == mark && board[1][1] == mark && board[2][2] == mark) ||
+        (board[0][2] == mark && board[1][1] == mark && board[2][0] == mark)) 
     {
         return true;
     }
@@ -132,7 +131,7 @@ bool wins(char mark)
 
 bool fullboard() 
 {
-    for (const auto &row : comboard) 
+    for (const auto &row : board) 
     {
         for (char cell : row) 
         {
@@ -191,13 +190,13 @@ if(x==1)
             cout << "Player " << currentPlayer << ", enter row and column (0-2): ";
             cin >> row >> col;
 
-            if (row < 0  row > 2  col < 0  col > 2  comboard[row][col] != ' ') 
+            if (row < 0  row > 2  col < 0  col > 2  board[row][col] != ' ') 
             {
                 cout << "Invalid move. Try again." << endl;
                 continue;
             }
 
-            comboard[row][col] = currentPlayer;
+            board[row][col] = currentPlayer;
         } 
     else 
         {
@@ -206,14 +205,14 @@ if(x==1)
             row = computerMove.first;
             col = computerMove.second;
 
-            while (comboard[row][col] != ' ') 
+            while (board[row][col] != ' ') 
             {
                 computerMove = randommove();
                 row = computerMove.first;
                 col = computerMove.second;
             }
 
-            comboard[row][col] = currentPlayer;
+            board[row][col] = currentPlayer;
         }
 
         if (wins(currentPlayer)) 
