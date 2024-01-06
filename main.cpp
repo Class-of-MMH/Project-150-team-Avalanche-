@@ -26,69 +26,32 @@ void display()
 }
 void display_board()
 {
-
-
-    cout<<"PLAYER - 1 [X] PLAYER - 2 [O]\n";
-    cout<<"                      |     |     ";
-    cout<<"  "<<board[0][0]<<"  | "<<board[0][1]<<"  |  "<<board[0][2]<<"\n";
-    cout<<"_|_|_";
-    cout<<"     |     |     ";
-    cout<<"  "<<board[1][0]<<"  | "<<board[1][1]<<"  |  "<<board[1][2]<<"\n";
-    cout<<"_|_|_";
-    cout<<"     |     |     ";
-    cout<<"  "<<board[2][0]<<"  | "<<board[2][1]<<"  |  "<<board[2][2]<<"\n";
-    cout<<"     |     |     ";
+    cout << "   0  1  2" << endl;
+    for (int i = 0; i < 3; ++i) 
+    {
+        cout << i << " ";
+        for (int j = 0; j < 3; ++j) 
+        {
+            cout << board[i][j];
+            if (j < 2) cout << " |";
+        }
+        cout << endl;
+        if (i < 2) cout << "  --------  " << endl;
+    }
 }
 
-void player_turn()
-{
-    if(turn == 'X')
-    {
-        cout<<"\nPlayer - 1 [X] turn : ";
+bool win(char mark) {
+    for (int i = 0; i < 3; ++i) {
+        if ((board[i][0] == mark && board[i][1] == mark && board[i][2] == mark) ||
+            (board[0][i] == mark && board[1][i] == mark && board[2][i] == mark)) {
+            return true;
+        }
     }
-    else if(turn == 'O')
-    {
-        cout<<"\nPlayer - 2 [O] turn : ";
+    if ((board[0][0] == mark && board[1][1] == mark && board[2][2] == mark) ||
+        (board[0][2] == mark && board[1][1] == mark && board[2][0] == mark)) {
+        return true;
     }
-    cin>> choice;
-
-    switch(choice)
-    {
-        case 1: row=0; col=0; break;
-        case 2: row=0; col=1; break;
-        case 3: row=0; col=2; break;
-        case 4: row=1; col=0; break;
-        case 5: row=1; col=1; break;
-        case 6: row=1; col=2; break;
-        case 7: row=2; col=0; break;
-        case 8: row=2; col=1; break;
-        case 9: row=2; col=2; break;
-        default:
-            cout<<"Invalid Move";
-    }
-    if(turn == 'X' &&board[row][col] != 'X' && board[row][col] != 'O')
-    {
-
-        board[row][col] = 'X';
-        turn = 'O';
-
-
-    }
-    else if(turn == 'O' && board[row][col] != 'X' && board[row][col] != 'O')
-    {
-
-        board[row][col] = 'O';
-        turn = 'X';
-
-    }
-    else 
-    {
-
-        cout<<"invalid turn!!please turn another";
-        player_turn();
-    }
-
-    display_board();
+    return false;
 }
 
   bool gameover()
@@ -159,22 +122,36 @@ int main()
     cin>>x;
 if(x==1)
     {
-    while(gameover())
-    {
+    int row, col;
+    char currentPlayer = 'X';
+
+    while (true) {
         display_board();
-        player_turn();
-        gameover();
+
+        cout << "Player " << currentPlayer << ", enter row and column (0-2): ";
+        cin >> row >> col;
+
+        if (row < 0 || row > 2 || col < 0 || col > 2 || board[row][col] != ' ') {
+            cout << "Invalid move. Please choose another move." << endl;
+            continue;
+        }
+
+        board[row][col] = currentPlayer;
+
+        if (win(currentPlayer)) {
+            display_board();
+            cout << "Congo! Player " << currentPlayer << " wins!" << endl;
+            break;
+        }
+
+        if (fullboard()) {
+            display_board();
+            cout << "Opps! No one wins! It's a draw" << endl;
+            break;
+        }
+
+        currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
     }
-    if(turn == 'O' && draw == false)
-    {
-        cout<<"\nCongo! Player 'X' has won the game"<<"\n";
-    }
-    else if(turn == 'X' && draw == false)
-    {
-        cout<<"\nCongo! Player 'O' has won the game"<<"\n";
-    }
-    else
-    cout<<"\nOpps! No one wins! Game is draw!!!"<<"\n";
     }
     else
     {
@@ -190,15 +167,15 @@ if(x==1)
             cout << "Player " << currentPlayer << ", enter row and column (0-2): ";
             cin >> row >> col;
 
-            if (row < 0  row > 2  col < 0  col > 2  board[row][col] != ' ') 
+            if (row < 0 && row > 2 || col < 0 && col > 2 || board[row][col] != ' ') 
             {
-                cout << "Invalid move. Try again." << endl;
+                cout << "Invalid move. Please choose another move." << endl;
                 continue;
             }
 
             board[row][col] = currentPlayer;
         } 
-    else 
+      else 
         {
             cout << "Computer's turn:" << endl;
             pair<int, int> computerMove = randommove();
@@ -220,10 +197,10 @@ if(x==1)
             display();
             if (currentPlayer == 'X') 
             {
-                cout << "Player " << currentPlayer << " wins!" << endl;
+                cout << "Congo! Player " << currentPlayer << " wins!" << endl;
             } else 
             {
-                cout << "Computer wins!" << endl;
+                cout << "OMG! Computer wins!" << endl;
             }
             break;
         }
@@ -231,7 +208,7 @@ if(x==1)
         if (fullboard()) 
         {
             display();
-            cout << "It's a tie!" << endl;
+            cout << "Opps! No one wins! It's a draw!" << endl;
             break;
         }
 
