@@ -9,34 +9,34 @@ bool draw = false;
 
 vector<vector<char>> board(3, vector<char>(3, ' '));
 
-void display() 
+void display()
 {
-    cout << "   0  1  2" << endl;
-    for (int i = 0; i < 3; ++i) 
+    cout << "   0   1   2" << endl;
+    for (int i = 0; i < 3; ++i)
     {
         cout << i << " ";
-        for (int j = 0; j < 3; ++j) 
+        for (int j = 0; j < 3; ++j)
         {
             cout << board[i][j];
-            if (j < 2) cout << " |";
+            if (j < 2) cout << "  |";
         }
         cout << endl;
-        if (i < 2) cout << "  --------  " << endl;
+        if (i < 2) cout << "  *|*|*** " << endl;
     }
 }
 void display_board()
 {
-    cout << "   0  1  2" << endl;
-    for (int i = 0; i < 3; ++i) 
+    cout << "   0   1   2" << endl;
+    for (int i = 0; i < 3; ++i)
     {
         cout << i << " ";
-        for (int j = 0; j < 3; ++j) 
+        for (int j = 0; j < 3; ++j)
         {
             cout << board[i][j];
-            if (j < 2) cout << " |";
+            if (j < 2) cout << "  |";
         }
         cout << endl;
-        if (i < 2) cout << "  --------  " << endl;
+        if (i < 2) cout << "  *|*|*** " << endl;
     }
 }
 
@@ -74,29 +74,29 @@ bool win(char mark) {
 }
 
 
-bool wins(char mark) 
+bool wins(char mark)
 {
     for (int i = 0; i < 3; ++i)
     {
         if ((board[i][0] == mark && board[i][1] == mark && board[i][2] == mark) ||
-            (board[0][i] == mark && board[1][i] == mark && board[2][i] == mark)) 
+            (board[0][i] == mark && board[1][i] == mark && board[2][i] == mark))
         {
             return true;
         }
     }
     if ((board[0][0] == mark && board[1][1] == mark && board[2][2] == mark) ||
-        (board[0][2] == mark && board[1][1] == mark && board[2][0] == mark)) 
+        (board[0][2] == mark && board[1][1] == mark && board[2][0] == mark))
     {
         return true;
     }
     return false;
 }
 
-bool fullboard() 
+bool fullboard()
 {
-    for (const auto &row : board) 
+    for (const auto &row : board)
     {
-        for (char cell : row) 
+        for (char cell : row)
         {
             if (cell == ' ') return false;
         }
@@ -104,7 +104,7 @@ bool fullboard()
     return true;
 }
 
-pair<int, int> randommove() 
+pair<int, int> randommove()
 {
     srand(static_cast<unsigned int>(time(nullptr)));
     int row = rand() % 3;
@@ -158,31 +158,31 @@ if(x==1)
         int row, col;
     char currentPlayer = 'X';
 
-    while (true) 
+    while (true)
    {
         display ();
 
-        if (currentPlayer == 'X') 
+        if (currentPlayer == 'X')
         {
             cout << "Player " << currentPlayer << ", enter row and column (0-2): ";
             cin >> row >> col;
 
-            if (row < 0 && row > 2 || col < 0 && col > 2 || board[row][col] != ' ') 
+            if (row < 0 && row > 2 || col < 0 && col > 2 || board[row][col] != ' ')
             {
                 cout << "Invalid move. Please choose another move." << endl;
                 continue;
             }
 
             board[row][col] = currentPlayer;
-        } 
-      else 
+        }
+      else
         {
             cout << "Computer's turn:" << endl;
             pair<int, int> computerMove = randommove();
             row = computerMove.first;
             col = computerMove.second;
 
-            while (board[row][col] != ' ') 
+            while (board[row][col] != ' ')
             {
                 computerMove = randommove();
                 row = computerMove.first;
@@ -192,20 +192,20 @@ if(x==1)
             board[row][col] = currentPlayer;
         }
 
-        if (wins(currentPlayer)) 
+        if (wins(currentPlayer))
         {
             display();
-            if (currentPlayer == 'X') 
+            if (currentPlayer == 'X')
             {
                 cout << "Congo! Player " << currentPlayer << " wins!" << endl;
-            } else 
+            } else
             {
                 cout << "OMG! Computer wins!" << endl;
             }
             break;
         }
 
-        if (fullboard()) 
+        if (fullboard())
         {
             display();
             cout << "Opps! No one wins! It's a draw!" << endl;
