@@ -122,38 +122,56 @@ int main()
     cout<<"Select 1 or 2."<<endl;
     int x;
     cin>>x;
-if(x==1)
+    if(x==1)
     {
-    int row, col;
-    char currentPlayer = 'X';
+     cout<<"How many rounds you wanna play?"<<endl;
+    int rounds;
+    cin>>rounds;
 
-    while (true) {
-        display_board();
+    int playerXWins = 0, playerOWins = 0;
 
-        cout << "Player " << currentPlayer << ", enter row and column (0-2): ";
-        cin >> row >> col;
+    for (int round = 1; round <= rounds; ++round) {
+        board = vector<vector<char>>(3, vector<char>(3, ' '));
+        int row, col;
+        char currentPlayer = 'X';
 
-        if (row < 0 || row > 2 || col < 0 || col > 2 || board[row][col] != ' ') {
-            cout << "Invalid move. Please choose another move." << endl;
-            continue;
-        }
-
-        board[row][col] = currentPlayer;
-
-        if (win(currentPlayer)) {
+        while (true) {
             display_board();
-            cout << "Congo! Player " << currentPlayer << " wins!" << endl;
-            break;
-        }
 
-        if (fullboard()) {
-            display_board();
-            cout << "Opps! No one wins! It's a draw" << endl;
-            break;
-        }
+            cout << "Round " << round << " - Player " << currentPlayer << ", enter row and column (0-2): ";
+            cin >> row >> col;
 
-        currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
+            if (row < 0 || row > 2 || col < 0 || col > 2 || board[row][col] != ' ') {
+                cout << "Invalid move. Try again." << endl;
+                continue;
+            }
+
+            board[row][col] = currentPlayer;
+
+            if (wins(currentPlayer)) {
+                display_board();
+                cout << "Round " << round << " - Congo! Player " << currentPlayer << " wins!" << endl;
+                if (currentPlayer == 'X') ++playerXWins;
+                else ++playerOWins;
+                break;
+            }
+
+            if (fullboard()) {
+                display_board();
+                cout << "Round " << round << " - Wow! It's a draw!" << endl;
+                break;
+            }
+
+            currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
+        }
     }
+
+    cout << "Final Score - Player X:  " << playerXWins << " |||| Player O: " << playerOWins << endl;
+    if (playerXWins > playerOWins) cout << "Congo! Player X wins the game!";
+    else if (playerOWins > playerXWins) cout << "Congo! Player O wins the game!";
+    else cout << "Opps! No one wins. It's a draw!";
+
+    return 0;
     }
     else
     {
