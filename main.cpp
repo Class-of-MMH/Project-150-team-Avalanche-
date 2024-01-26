@@ -21,7 +21,7 @@ void display()
             if (j < 2) cout << "  |";
         }
         cout << endl;
-        if (i < 2) cout << "  *|*|*** " << endl;
+        if (i < 2) cout << "  ***|***|*** " << endl;
     }
 }
 void display_board()
@@ -36,9 +36,10 @@ void display_board()
             if (j < 2) cout << "  |";
         }
         cout << endl;
-        if (i < 2) cout << "  *|*|*** " << endl;
+        if (i < 2) cout << "  ***|***|*** " << endl;
     }
 }
+
 
 bool win(char mark) {
     for (int i = 0; i < 3; ++i) {
