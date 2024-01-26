@@ -114,10 +114,12 @@ pair<int, int> randommove()
 
 int main()
 {
-    cout<<"T I C  -- T A C -- T O E -- G A M E\n";
+   cout<<"T I C  -- T A C -- T O E -- G A M E\n";
     cout<<"\nHello! Hope you are doing well. For some refreshment, let's play a game.\n";
     cout<<"You can play with your friend or computer. Which one will you prefer? "<<endl;
-    cout<<"For playing with your friend press 1, Or for playing with computer press 2. Good Luck."<<endl;
+    cout<<"\n1.Play with friend."<<endl;
+    cout<<"2.Play with computer." <<endl;
+    cout<<"Select 1 or 2."<<endl;
     int x;
     cin>>x;
 if(x==1)
